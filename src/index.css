@@ -1,0 +1,219 @@
+@import "tailwindcss";
+
+/* ─── Dark mode: class strategy ─────────────────────────────── */
+@variant dark (&:where(.dark, .dark *));
+
+/* ─── Theme tokens ───────────────────────────────────────────── */
+@theme {
+  /* Purple */
+  --color-purple:           #7C5DFA;
+  --color-purple-light:     #9277FF;
+
+  /* Navy */
+  --color-navy-dark:        #1E2139;
+  --color-navy:             #252945;
+
+  /* Blue-gray (no DEFAULT — use `bluegray` directly) */
+  --color-bluegray-light:   #DFE3FA;
+  --color-bluegray:         #888EB0;
+  --color-bluegray-dark:    #7E88C3;
+
+  /* Page backgrounds */
+  --color-background-light: #F8F8FB;
+  --color-background-dark:  #141625;
+
+  /* Card surfaces */
+  --color-card-light:       #FFFFFF;
+  --color-card-dark:        #1E2139;
+
+  /* Input dark surface */
+  --color-input-dark:       #252945;
+
+  /* Danger */
+  --color-danger:           #EC5757;
+  --color-danger-light:     #FF9797;
+
+  /* Typography */
+  --font-spartan: "League Spartan", sans-serif;
+
+  /* Shadows */
+  --shadow-card:      0px 10px 10px -10px rgba(72, 84, 159, 0.1);
+  --shadow-card-dark: 0px 10px 10px -10px rgba(0, 0, 0, 0.25);
+}
+
+/* ─── Base ───────────────────────────────────────────────────── */
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-spartan);
+    background-color: var(--color-background-light);
+    color: var(--color-navy-dark);
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  h1 { font-size: 32px; font-weight: 700; line-height: 36px; letter-spacing: -1px; }
+  h2 { font-size: 24px; font-weight: 700; line-height: 22px; letter-spacing: -0.75px; }
+  h3 { font-size: 15px; font-weight: 700; line-height: 24px; letter-spacing: -0.25px; }
+  h4 { font-size: 13px; font-weight: 700; line-height: 18px; letter-spacing: -0.1px; }
+}
+
+/* ─── Components ─────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Shared button base (inlined into each variant) ── */
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 9999px; font-weight: 700;
+    font-size: 13px; line-height: 15px; letter-spacing: -0.25px;
+    transition: all 0.15s ease; cursor: pointer;
+    padding: 16px 24px;
+    background-color: var(--color-purple);
+    color: #fff;
+  }
+  .btn-primary:hover { background-color: var(--color-purple-light); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 9999px; font-weight: 700;
+    font-size: 13px; line-height: 15px; letter-spacing: -0.25px;
+    transition: all 0.15s ease; cursor: pointer;
+    padding: 16px 24px;
+    background-color: #F9FAFE;
+    color: var(--color-bluegray-dark);
+  }
+  .btn-secondary:hover { background-color: var(--color-bluegray-light); }
+
+  .btn-danger {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 9999px; font-weight: 700;
+    font-size: 13px; line-height: 15px; letter-spacing: -0.25px;
+    transition: all 0.15s ease; cursor: pointer;
+    padding: 16px 24px;
+    background-color: var(--color-danger);
+    color: #fff;
+  }
+  .btn-danger:hover { background-color: var(--color-danger-light); }
+
+  .btn-dark {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 9999px; font-weight: 700;
+    font-size: 13px; line-height: 15px; letter-spacing: -0.25px;
+    transition: all 0.15s ease; cursor: pointer;
+    padding: 16px 24px;
+    background-color: var(--color-navy-dark);
+    color: var(--color-bluegray-light);
+  }
+  .btn-dark:hover { background-color: #0C0E16; }
+
+  .btn-edit {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 9999px; font-weight: 700;
+    font-size: 13px; line-height: 15px; letter-spacing: -0.25px;
+    transition: all 0.15s ease; cursor: pointer;
+    padding: 16px 24px;
+    background-color: #F9FAFE;
+    color: var(--color-bluegray-dark);
+  }
+  .btn-edit:hover { background-color: var(--color-bluegray-light); }
+
+  /* Dark mode button overrides */
+  :where(.dark, .dark *) .btn-secondary,
+  :where(.dark, .dark *) .btn-edit {
+    background-color: var(--color-navy);
+    color: var(--color-bluegray-light);
+  }
+  :where(.dark, .dark *) .btn-secondary:hover { background-color: rgba(255,255,255,0.1); }
+  :where(.dark, .dark *) .btn-edit:hover       { background-color: #fff; color: var(--color-navy-dark); }
+  :where(.dark, .dark *) .btn-dark             { background-color: var(--color-navy); }
+  :where(.dark, .dark *) .btn-dark:hover       { background-color: var(--color-navy-dark); }
+
+  /* ── Form label ── */
+  .form-label {
+    display: block;
+    font-size: 13px; font-weight: 500; letter-spacing: -0.1px;
+    margin-bottom: 10px;
+    color: var(--color-bluegray-dark);
+  }
+  :where(.dark, .dark *) .form-label { color: var(--color-bluegray-light); }
+
+  /* ── Form input ── */
+  .form-input {
+    width: 100%;
+    border: 1px solid var(--color-bluegray-light);
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 13px; font-weight: 700;
+    color: var(--color-navy-dark);
+    letter-spacing: -0.25px;
+    outline: none;
+    transition: border-color 0.15s ease;
+    cursor: pointer;
+    font-family: var(--font-spartan);
+  }
+  .form-input::placeholder { color: rgba(136, 142, 176, 0.4); }
+  .form-input:focus         { border-color: var(--color-purple); }
+  .form-input-error         { border-color: var(--color-danger) !important; }
+
+  :where(.dark, .dark *) .form-input {
+    border-color: var(--color-navy);
+    background-color: var(--color-navy);
+    color: #fff;
+  }
+  :where(.dark, .dark *) .form-input:focus { border-color: var(--color-purple); }
+
+  /* ── Card ── */
+  .card {
+    background-color: var(--color-card-light);
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+  }
+  :where(.dark, .dark *) .card {
+    background-color: var(--color-card-dark);
+    box-shadow: var(--shadow-card-dark);
+  }
+
+  /* ── Status badges ── */
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    border-radius: 6px; padding: 12px 14px;
+    font-size: 13px; font-weight: 700; line-height: 15px; letter-spacing: -0.25px;
+  }
+  .status-paid    { background-color: rgba(51,214,159,0.06); color: #33D69F; }
+  .status-pending { background-color: rgba(255,143,0,0.06);  color: #FF8F00; }
+  .status-draft   { background-color: rgba(30,33,57,0.06);   color: var(--color-navy-dark); }
+  :where(.dark, .dark *) .status-draft {
+    background-color: rgba(223,227,250,0.06);
+    color: var(--color-bluegray-light);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar       { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background-color: rgba(223,227,250,0.5); border-radius: 9999px; }
+}
+
+/* ─── Dark body background ───────────────────────────────────── */
+:where(.dark) body {
+  background-color: var(--color-background-dark);
+  color: #fff;
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.animate-slide-in { animation: slideIn  0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.animate-fade-in  { animation: fadeIn   0.2s ease-out; }
+.animate-scale-in { animation: scaleIn  0.2s cubic-bezier(0.4, 0, 0.2, 1); }
