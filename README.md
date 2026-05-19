@@ -4,12 +4,6 @@ A fully responsive, full-featured Invoice Management Application built with **Re
 
 ---
 
-## 🚀 Live Demo
-
-> Deploy to Vercel or Netlify (see Deployment section below)
-
----
-
 ## 🛠 Setup Instructions
 
 ### Prerequisites
